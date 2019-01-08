@@ -14,334 +14,350 @@ import { isSameUser, isSameDay } from './utils';
 // import MessageVideo from './MessageVideo';
 
 export default class Bubble extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
-  // onLongPress = () => {
-  //   if (this.props.onLongPress) {
-  //     this.props.onLongPress(this.context, this.props.currentMessage);
-  //   } else if (this.props.currentMessage.text) {
-  //     const options = ['Copy Text', 'Cancel'];
-  //     const cancelButtonIndex = options.length - 1;
-  //     this.context.actionSheet().showActionSheetWithOptions(
-  //       {
-  //         options,
-  //         cancelButtonIndex
-  //       },
-  //       buttonIndex => {
-  //         switch (buttonIndex) {
-  //           case 0:
-  //             Clipboard.setString(this.props.currentMessage.text);
-  //             break;
-  //           default:
-  //             break;
-  //         }
-  //       }
-  //     );
-  //   }
-  // }
-
-  handleBubbleToNext() {
-    if (
-      isSameUser(this.props.currentMessage, this.props.nextMessage) &&
-      isSameDay(this.props.currentMessage, this.props.nextMessage)
-    ) {
-      return StyleSheet.flatten([
-        styles[this.props.position].containerToNext,
-        this.props.containerToNextStyle[this.props.position]
-      ]);
+    constructor(props) {
+        super(props);
     }
-    return null;
-  }
 
-  handleBubbleToPrevious() {
-    if (
-      isSameUser(this.props.currentMessage, this.props.previousMessage) &&
-      isSameDay(this.props.currentMessage, this.props.previousMessage)
-    ) {
-      return StyleSheet.flatten([
-        styles[this.props.position].containerToPrevious,
-        this.props.containerToPreviousStyle[this.props.position]
-      ]);
-    }
-    return null;
-  }
+    // onLongPress = () => {
+    //   if (this.props.onLongPress) {
+    //     this.props.onLongPress(this.context, this.props.currentMessage);
+    //   } else if (this.props.currentMessage.text) {
+    //     const options = ['Copy Text', 'Cancel'];
+    //     const cancelButtonIndex = options.length - 1;
+    //     this.context.actionSheet().showActionSheetWithOptions(
+    //       {
+    //         options,
+    //         cancelButtonIndex
+    //       },
+    //       buttonIndex => {
+    //         switch (buttonIndex) {
+    //           case 0:
+    //             Clipboard.setString(this.props.currentMessage.text);
+    //             break;
+    //           default:
+    //             break;
+    //         }
+    //       }
+    //     );
+    //   }
+    // }
 
-  renderMessageText() {
-    if (this.props.currentMessage.text) {
-      const { containerStyle, wrapperStyle, ...messageTextProps } = this.props;
-      if (this.props.renderMessageText) {
-        return this.props.renderMessageText(messageTextProps);
-      }
-      return <MessageText {...messageTextProps} />;
-    }
-    return null;
-  }
-
-  renderMessageImage() {
-    if (this.props.currentMessage.image) {
-      const { containerStyle, wrapperStyle, ...messageImageProps } = this.props;
-      if (this.props.renderMessageImage) {
-        return this.props.renderMessageImage(messageImageProps);
-      }
-      return <MessageImage {...messageImageProps} />;
-    }
-    return null;
-  }
-
-  // renderMessageVideo() {
-  //   if (this.props.currentMessage.video) {
-  //     const { containerStyle, wrapperStyle, ...messageVideoProps } = this.props;
-  //     if (this.props.renderMessageVideo) {
-  //       return this.props.renderMessageVideo(messageVideoProps);
-  //     }
-  //     return <MessageVideo {...messageVideoProps} />;
-  //   }
-  //   return null;
-  // }
-
-  renderTicks() {
-    const { currentMessage } = this.props;
-    if (this.props.renderTicks) {
-      return this.props.renderTicks(currentMessage);
-    }
-    if (currentMessage.user._id !== this.props.user._id) {
-      return null;
-    }
-    if (
-      currentMessage.sent ||
-      currentMessage.received ||
-      currentMessage.pending
-    ) {
-      return (
-        <div style={styles.tickView}>
-          {currentMessage.sent && (
-            <div style={[styles.tick, this.props.tickStyle]}>✓</div>
-          )}
-          {currentMessage.received && (
-            <div style={[styles.tick, this.props.tickStyle]}>✓</div>
-          )}
-          {currentMessage.pending && (
-            <div style={[styles.tick, this.props.tickStyle]}>🕓</div>
-          )}
-        </div>
-      );
-    }
-    return null;
-  }
-
-  renderTime() {
-    if (this.props.currentMessage.createdAt) {
-      const { containerStyle, wrapperStyle, ...timeProps } = this.props;
-      if (this.props.renderTime) {
-        return this.props.renderTime(timeProps);
-      }
-      return <Time {...timeProps} />;
-    }
-    return null;
-  }
-
-  renderUsername() {
-    const { currentMessage } = this.props;
-    if (this.props.renderUsernameOnMessage) {
-      if (currentMessage.user._id === this.props.user._id) {
+    handleBubbleToNext() {
+        if (
+            isSameUser(this.props.currentMessage, this.props.nextMessage) &&
+            isSameDay(this.props.currentMessage, this.props.nextMessage)
+        ) {
+            return {
+                ...styles[this.props.position].containerToNext,
+                ...this.props.containerToNextStyle[this.props.position]
+            };
+        }
         return null;
-      }
-      return (
-        <div style={styles.usernameView}>
-          <div style={[styles.username, this.props.usernameStyle]}>
-            ~ {currentMessage.user.name}
-          </div>
-        </div>
-      );
     }
-    return null;
-  }
 
-  renderCustomView() {
-    if (this.props.renderCustomView) {
-      return this.props.renderCustomView(this.props);
+    handleBubbleToPrevious() {
+        if (
+            isSameUser(this.props.currentMessage, this.props.previousMessage) &&
+            isSameDay(this.props.currentMessage, this.props.previousMessage)
+        ) {
+            return {
+                ...styles[this.props.position].containerToPrevious,
+                ...this.props.containerToPreviousStyle[this.props.position]
+            };
+        }
+        return null;
     }
-    return null;
-  }
 
-  render() {
-    return (
-      <div
-        style={[
-          styles[this.props.position].container,
-          this.props.containerStyle[this.props.position]
-        ]}>
-        <div
-          style={[
-            styles[this.props.position].wrapper,
-            this.props.wrapperStyle[this.props.position],
-            this.handleBubbleToNext(),
-            this.handleBubbleToPrevious()
-          ]}>
-          <button
-            onLongPress={this.onLongPress}
-            // accessibilityTraits="text"
-            {...this.props.touchableProps}>
-            <div>
-              {this.renderCustomView()}
-              {this.renderMessageImage()}
-              {/*this.renderMessageVideo()*/}
-              {this.renderMessageText()}
-              <div
-                style={[
-                  styles[this.props.position].bottom,
-                  this.props.bottomContainerStyle[this.props.position]
-                ]}>
-                {this.renderUsername()}
-                {this.renderTime()}
-                {this.renderTicks()}
-              </div>
+    renderMessageText() {
+        if (this.props.currentMessage.text) {
+            const {
+                containerStyle,
+                wrapperStyle,
+                ...messageTextProps
+            } = this.props;
+            if (this.props.renderMessageText) {
+                return this.props.renderMessageText(messageTextProps);
+            }
+            return <MessageText {...messageTextProps} />;
+        }
+        return null;
+    }
+
+    renderMessageImage() {
+        if (this.props.currentMessage.image) {
+            const {
+                containerStyle,
+                wrapperStyle,
+                ...messageImageProps
+            } = this.props;
+            if (this.props.renderMessageImage) {
+                return this.props.renderMessageImage(messageImageProps);
+            }
+            return <MessageImage {...messageImageProps} />;
+        }
+        return null;
+    }
+
+    // renderMessageVideo() {
+    //   if (this.props.currentMessage.video) {
+    //     const { containerStyle, wrapperStyle, ...messageVideoProps } = this.props;
+    //     if (this.props.renderMessageVideo) {
+    //       return this.props.renderMessageVideo(messageVideoProps);
+    //     }
+    //     return <MessageVideo {...messageVideoProps} />;
+    //   }
+    //   return null;
+    // }
+
+    renderTicks() {
+        const { currentMessage } = this.props;
+        if (this.props.renderTicks) {
+            return this.props.renderTicks(currentMessage);
+        }
+        if (currentMessage.user._id !== this.props.user._id) {
+            return null;
+        }
+        if (
+            currentMessage.sent ||
+            currentMessage.received ||
+            currentMessage.pending
+        ) {
+            return (
+                <div style={styles.tickView}>
+                    {currentMessage.sent && (
+                        <div style={[styles.tick, this.props.tickStyle]}>✓</div>
+                    )}
+                    {currentMessage.received && (
+                        <div style={[styles.tick, this.props.tickStyle]}>✓</div>
+                    )}
+                    {currentMessage.pending && (
+                        <div style={[styles.tick, this.props.tickStyle]}>
+                            🕓
+                        </div>
+                    )}
+                </div>
+            );
+        }
+        return null;
+    }
+
+    renderTime() {
+        if (this.props.currentMessage.createdAt) {
+            const { containerStyle, wrapperStyle, ...timeProps } = this.props;
+            if (this.props.renderTime) {
+                return this.props.renderTime(timeProps);
+            }
+            return <Time {...timeProps} />;
+        }
+        return null;
+    }
+
+    renderUsername() {
+        const { currentMessage } = this.props;
+        if (this.props.renderUsernameOnMessage) {
+            if (currentMessage.user._id === this.props.user._id) {
+                return null;
+            }
+            return (
+                <div style={styles.usernameView}>
+                    <div style={[styles.username, this.props.usernameStyle]}>
+                        ~ {currentMessage.user.name}
+                    </div>
+                </div>
+            );
+        }
+        return null;
+    }
+
+    renderCustomView() {
+        if (this.props.renderCustomView) {
+            return this.props.renderCustomView(this.props);
+        }
+        return null;
+    }
+
+    render() {
+        console.log(this.props);
+        return (
+            <div
+                className={`giftedChatBubbleContainer-${this.props.position}`}
+                // style={[
+                //     styles[this.props.position].container,
+                //     this.props.containerStyle[this.props.position]
+                // ]}
+            >
+                <div
+                    className={`giftedChatBubbleWrapper-${this.props.position}`}
+                    style={[
+                        styles[this.props.position].wrapper,
+                        this.props.wrapperStyle[this.props.position],
+                        this.handleBubbleToNext(),
+                        this.handleBubbleToPrevious()
+                    ]}>
+                    <button
+                        // onLongPress={this.onLongPress}
+                        // accessibilityTraits="text"
+                        {...this.props.touchableProps}>
+                        <div>
+                            {this.renderCustomView()}
+                            {this.renderMessageImage()}
+                            {/*this.renderMessageVideo()*/}
+                            {this.renderMessageText()}
+                            <div
+                                style={[
+                                    styles[this.props.position].bottom,
+                                    this.props.bottomContainerStyle[
+                                        this.props.position
+                                    ]
+                                ]}>
+                                {this.renderUsername()}
+                                {this.renderTime()}
+                                {this.renderTicks()}
+                            </div>
+                        </div>
+                    </button>
+                </div>
             </div>
-          </button>
-        </div>
-      </div>
-    );
-  }
+        );
+    }
 }
 
 const styles = {
-  left: {
-    container: {
-      flex: 1,
-      alignItems: 'flex-start'
+    left: {
+        container: {
+            flex: 1,
+            alignItems: 'flex-start'
+        },
+        wrapper: {
+            borderRadius: 15,
+            backgroundColor: Color.leftBubbleBackground,
+            marginRight: 60,
+            minHeight: 20,
+            justifyContent: 'flex-end'
+        },
+        containerToNext: {
+            borderBottomLeftRadius: 3
+        },
+        containerToPrevious: {
+            borderTopLeftRadius: 3
+        },
+        bottom: {
+            flexDirection: 'row',
+            justifyContent: 'flex-start'
+        }
     },
-    wrapper: {
-      borderRadius: 15,
-      backgroundColor: Color.leftBubbleBackground,
-      marginRight: 60,
-      minHeight: 20,
-      justifyContent: 'flex-end'
+    right: {
+        container: {
+            flex: 1,
+            alignItems: 'flex-end'
+        },
+        wrapper: {
+            borderRadius: 15,
+            backgroundColor: Color.defaultBlue,
+            marginLeft: 60,
+            minHeight: 20,
+            justifyContent: 'flex-end'
+        },
+        containerToNext: {
+            borderBottomRightRadius: 3
+        },
+        containerToPrevious: {
+            borderTopRightRadius: 3
+        },
+        bottom: {
+            flexDirection: 'row',
+            justifyContent: 'flex-end'
+        }
     },
-    containerToNext: {
-      borderBottomLeftRadius: 3
+    tick: {
+        fontSize: 10,
+        backgroundColor: Color.backgroundTransparent,
+        color: Color.white
     },
-    containerToPrevious: {
-      borderTopLeftRadius: 3
+    tickView: {
+        flexDirection: 'row',
+        marginRight: 10
     },
-    bottom: {
-      flexDirection: 'row',
-      justifyContent: 'flex-start'
+    username: {
+        top: -3,
+        left: 0,
+        fontSize: 12,
+        backgroundColor: 'transparent',
+        color: '#aaa'
+    },
+    usernameView: {
+        flexDirection: 'row',
+        marginHorizontal: 10
     }
-  },
-  right: {
-    container: {
-      flex: 1,
-      alignItems: 'flex-end'
-    },
-    wrapper: {
-      borderRadius: 15,
-      backgroundColor: Color.defaultBlue,
-      marginLeft: 60,
-      minHeight: 20,
-      justifyContent: 'flex-end'
-    },
-    containerToNext: {
-      borderBottomRightRadius: 3
-    },
-    containerToPrevious: {
-      borderTopRightRadius: 3
-    },
-    bottom: {
-      flexDirection: 'row',
-      justifyContent: 'flex-end'
-    }
-  },
-  tick: {
-    fontSize: 10,
-    backgroundColor: Color.backgroundTransparent,
-    color: Color.white
-  },
-  tickView: {
-    flexDirection: 'row',
-    marginRight: 10
-  },
-  username: {
-    top: -3,
-    left: 0,
-    fontSize: 12,
-    backgroundColor: 'transparent',
-    color: '#aaa'
-  },
-  usernameView: {
-    flexDirection: 'row',
-    marginHorizontal: 10
-  }
 };
 
 Bubble.contextTypes = {
-  actionSheet: PropTypes.func
+    actionSheet: PropTypes.func
 };
 
 Bubble.defaultProps = {
-  touchableProps: {},
-  onLongPress: null,
-  renderMessageImage: null,
-  renderMessageVideo: null,
-  renderMessageText: null,
-  renderCustomView: null,
-  renderUsername: null,
-  renderTicks: null,
-  renderTime: null,
-  position: 'left',
-  currentMessage: {
-    text: null,
-    createdAt: null,
-    image: null
-  },
-  nextMessage: {},
-  previousMessage: {},
-  containerStyle: {},
-  wrapperStyle: {},
-  bottomContainerStyle: {},
-  tickStyle: {},
-  usernameStyle: {},
-  containerToNextStyle: {},
-  containerToPreviousStyle: {}
+    touchableProps: {},
+    onLongPress: null,
+    renderMessageImage: null,
+    renderMessageVideo: null,
+    renderMessageText: null,
+    renderCustomView: null,
+    renderUsername: null,
+    renderTicks: null,
+    renderTime: null,
+    position: 'left',
+    currentMessage: {
+        text: null,
+        createdAt: null,
+        image: null
+    },
+    nextMessage: {},
+    previousMessage: {},
+    containerStyle: {},
+    wrapperStyle: {},
+    bottomContainerStyle: {},
+    tickStyle: {},
+    usernameStyle: {},
+    containerToNextStyle: {},
+    containerToPreviousStyle: {}
 };
 
 Bubble.propTypes = {
-  user: PropTypes.object.isRequired,
-  touchableProps: PropTypes.object,
-  onLongPress: PropTypes.func,
-  renderMessageImage: PropTypes.func,
-  renderMessageVideo: PropTypes.func,
-  renderMessageText: PropTypes.func,
-  renderCustomView: PropTypes.func,
-  renderUsernameOnMessage: PropTypes.bool,
-  renderUsername: PropTypes.func,
-  renderTime: PropTypes.func,
-  renderTicks: PropTypes.func,
-  position: PropTypes.oneOf(['left', 'right']),
-  currentMessage: PropTypes.object,
-  nextMessage: PropTypes.object,
-  previousMessage: PropTypes.object,
-  containerStyle: PropTypes.shape({
-    left: stylePropType,
-    right: stylePropType
-  }),
-  wrapperStyle: PropTypes.shape({
-    left: stylePropType,
-    right: stylePropType
-  }),
-  bottomContainerStyle: PropTypes.shape({
-    left: stylePropType,
-    right: stylePropType
-  }),
-  tickStyle: stylePropType,
-  usernameStyle: stylePropType,
-  containerToNextStyle: PropTypes.shape({
-    left: stylePropType,
-    right: stylePropType
-  }),
-  containerToPreviousStyle: PropTypes.shape({
-    left: stylePropType,
-    right: stylePropType
-  })
+    user: PropTypes.object.isRequired,
+    touchableProps: PropTypes.object,
+    onLongPress: PropTypes.func,
+    renderMessageImage: PropTypes.func,
+    renderMessageVideo: PropTypes.func,
+    renderMessageText: PropTypes.func,
+    renderCustomView: PropTypes.func,
+    renderUsernameOnMessage: PropTypes.bool,
+    renderUsername: PropTypes.func,
+    renderTime: PropTypes.func,
+    renderTicks: PropTypes.func,
+    position: PropTypes.oneOf(['left', 'right']),
+    currentMessage: PropTypes.object,
+    nextMessage: PropTypes.object,
+    previousMessage: PropTypes.object,
+    containerStyle: PropTypes.shape({
+        left: stylePropType,
+        right: stylePropType
+    }),
+    wrapperStyle: PropTypes.shape({
+        left: stylePropType,
+        right: stylePropType
+    }),
+    bottomContainerStyle: PropTypes.shape({
+        left: stylePropType,
+        right: stylePropType
+    }),
+    tickStyle: stylePropType,
+    usernameStyle: stylePropType,
+    containerToNextStyle: PropTypes.shape({
+        left: stylePropType,
+        right: stylePropType
+    }),
+    containerToPreviousStyle: PropTypes.shape({
+        left: stylePropType,
+        right: stylePropType
+    })
 };

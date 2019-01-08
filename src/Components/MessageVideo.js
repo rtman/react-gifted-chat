@@ -5,52 +5,52 @@ import React from 'react';
 // import Video from 'react-native-video';
 
 export default function MessageVideo({
-  containerStyle,
-  videoProps,
-  videoStyle,
-  currentMessage
+    containerStyle,
+    videoProps,
+    videoStyle,
+    currentMessage
 }) {
-  return (
-    // eslint-disable-next-line no-use-before-define
-    <View style={[styles.container, containerStyle]}>
-      <Video
-        {...videoProps}
-        ref={r => {
-          this.player = r;
-        }}
-        source={{ uri: currentMessage.video }}
-        style={videoStyle}
-        resizeMode="cover"
-        onBuffer={this.onBuffer}
-        onLoadStart={this.onLoadStart}
-        onLoad={this.onLoad}
-      />
-    </View>
-  );
+    return (
+        // eslint-disable-next-line no-use-before-define
+        <View style={[styles.container, containerStyle]}>
+            <Video
+                {...videoProps}
+                ref={(r) => {
+                    this.player = r;
+                }}
+                source={{ uri: currentMessage.video }}
+                style={videoStyle}
+                resizeMode="cover"
+                onBuffer={this.onBuffer}
+                onLoadStart={this.onLoadStart}
+                onLoad={this.onLoad}
+            />
+        </View>
+    );
 }
 
 const styles = {
-  container: {}
+    container: {}
 };
 
 MessageVideo.defaultProps = {
-  currentMessage: {
-    // video: null,
-  },
-  containerStyle: {},
-  videoStyle: {
-    width: 150,
-    height: 100,
-    borderRadius: 13,
-    margin: 3,
-    resizeMode: 'cover'
-  },
-  videoProps: {}
+    currentMessage: {
+        // video: null,
+    },
+    containerStyle: {},
+    videoStyle: {
+        width: 150,
+        height: 100,
+        borderRadius: 13,
+        margin: 3,
+        resizeMode: 'cover'
+    },
+    videoProps: {}
 };
 
 MessageVideo.propTypes = {
-  currentMessage: PropTypes.object,
-  containerStyle: stylePropType,
-  videoStyle: stylePropType,
-  videoProps: PropTypes.object
+    currentMessage: PropTypes.object,
+    containerStyle: stylePropType,
+    videoStyle: stylePropType,
+    videoProps: PropTypes.object
 };

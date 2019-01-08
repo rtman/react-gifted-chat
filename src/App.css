@@ -1,33 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: roboto;
+    font-weight: 400;
+}
+
 .App {
-  text-align: center;
-  display: flex;
+    text-align: center;
+    display: flex;
+    height: 100vh;
+    width: 100vw;
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+    animation: App-logo-spin infinite 20s linear;
+    height: 40vmin;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.giftedChatContainer {
+    flex: 1 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.giftedChatMessageWindow {
+    display: flex;
+    flex-direction: column;
+}
+
+.giftedChatInputToolbarContainer {
+}
+
+.giftedChatInputToolbar {
+}
+
+.giftedChatComposer {
+}
+
+.giftedChatMessageWindowContainer {
+    flex: 1;
+}
+
+.giftedChatMessagesContainer {
+    flex: 1;
+}
+
+.giftedChatMessageList {
+    flex: 1 1;
+    display: flex;
+    flex-direction: column;
+    /*justify-content: center;*/
+}
+
+.giftedChatMessageRowContainer {
+    /*    flex: 1 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;*/
+}
+
+.giftedChatMessageContainer-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.giftedChatMessageContainer-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+}
+
+.giftedChatAvatarContainer-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.giftedChatAvatarContainer-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.giftedChatBubbleContainer-left {
+    /*    display: flex;
+    flex-direction: row;
+    flex: 1;*/
+    align-items: flex-start;
+    /*max-width: 40%;*/
+}
+
+.giftedChatBubbleContainer-right {
+    /*flex: 1;*/
+    align-items: flex-end;
+    /*max-width: 40%;*/
+}
+
+.giftedChatBubbleWrapper-left {
+    border-radius: 15px;
+    background-color: white;
+    margin-right: 60px;
+    min-height: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.giftedChatBubbleWrapper-right {
+    border-radius: 15px;
+    background-color: blue;
+    margin-right: 60px;
+    min-height: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.giftedChatSystemMessageContainer {
+}
+
+.giftedChatSystemMessageWrapper {
+}
+
+.giftedChatSystemMessageText {
 }

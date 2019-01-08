@@ -7,22 +7,22 @@ import React from 'react';
 // import Lightbox from 'react-native-lightbox';
 
 export default function MessageImage({
-  containerStyle,
-  lightboxProps,
-  imageProps,
-  imageStyle,
-  currentMessage
+    containerStyle,
+    lightboxProps,
+    imageProps,
+    imageStyle,
+    currentMessage
 }) {
-  return (
-    <div style={[styles.container, containerStyle]}>
-      <img
-        {...imageProps}
-        style={[styles.image, imageStyle]}
-        // source={{ uri: currentMessage.image }}
-        src={currentMessage.image}
-      />
-    </div>
-  );
+    return (
+        <div style={[styles.container, containerStyle]}>
+            <img
+                {...imageProps}
+                style={[styles.image, imageStyle]}
+                // source={{ uri: currentMessage.image }}
+                src={currentMessage.image}
+            />
+        </div>
+    );
 }
 
 /*
@@ -42,34 +42,34 @@ export default function MessageImage({
 */
 
 const styles = {
-  container: {},
-  image: {
-    width: 150,
-    height: 100,
-    borderRadius: 13,
-    margin: 3,
-    resizeMode: 'cover'
-  },
-  imageActive: {
-    flex: 1,
-    resizeMode: 'contain'
-  }
+    container: {},
+    image: {
+        width: 150,
+        height: 100,
+        borderRadius: 13,
+        margin: 3,
+        resizeMode: 'cover'
+    },
+    imageActive: {
+        flex: 1,
+        resizeMode: 'contain'
+    }
 };
 
 MessageImage.defaultProps = {
-  currentMessage: {
-    image: null
-  },
-  containerStyle: {},
-  imageStyle: {},
-  imageProps: {},
-  lightboxProps: {}
+    currentMessage: {
+        image: null
+    },
+    containerStyle: {},
+    imageStyle: {},
+    imageProps: {},
+    lightboxProps: {}
 };
 
 MessageImage.propTypes = {
-  currentMessage: PropTypes.object,
-  containerStyle: stylePropType,
-  imageStyle: stylePropType,
-  imageProps: PropTypes.object,
-  lightboxProps: PropTypes.object
+    currentMessage: PropTypes.object,
+    containerStyle: stylePropType,
+    imageStyle: stylePropType,
+    imageProps: PropTypes.object,
+    lightboxProps: PropTypes.object
 };
