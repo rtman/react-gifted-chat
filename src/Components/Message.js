@@ -9,6 +9,7 @@ import Avatar from './Avatar';
 import Bubble from './Bubble';
 import SystemMessage from './SystemMessage';
 import Day from './Day';
+import Time from './Time';
 
 import { isSameUser, isSameDay } from './utils';
 
@@ -85,6 +86,17 @@ export default class Message extends React.PureComponent {
         return <Avatar {...avatarProps} />;
     }
 
+    renderTime = () => {
+        if (this.props.currentMessage.createdAt) {
+            const { containerStyle, wrapperStyle, ...timeProps } = this.props;
+            if (this.props.renderTime) {
+                return this.props.renderTime(timeProps);
+            }
+            return <Time {...timeProps} />;
+        }
+        return null;
+    };
+
     render() {
         const sameUser = isSameUser(
             this.props.currentMessage,
@@ -114,6 +126,7 @@ export default class Message extends React.PureComponent {
                         {this.props.position === 'right'
                             ? this.renderAvatar()
                             : null}
+                        {this.renderTime()}
                     </div>
                 )}
             </div>

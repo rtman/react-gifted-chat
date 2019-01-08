@@ -123,15 +123,27 @@ export default class Bubble extends React.PureComponent {
             currentMessage.pending
         ) {
             return (
-                <div style={styles.tickView}>
+                <div
+                    className={'giftedChatTickContainer'}
+                    style={styles.tickView}>
                     {currentMessage.sent && (
-                        <div style={[styles.tick, this.props.tickStyle]}>✓</div>
+                        <div
+                            className={'giftedChatSentTick'}
+                            style={[styles.tick, this.props.tickStyle]}>
+                            ✓
+                        </div>
                     )}
                     {currentMessage.received && (
-                        <div style={[styles.tick, this.props.tickStyle]}>✓</div>
+                        <div
+                            className={'giftedChatReceivedTick'}
+                            style={[styles.tick, this.props.tickStyle]}>
+                            ✓
+                        </div>
                     )}
                     {currentMessage.pending && (
-                        <div style={[styles.tick, this.props.tickStyle]}>
+                        <div
+                            className={'giftedChatPendingTick'}
+                            style={[styles.tick, this.props.tickStyle]}>
                             🕓
                         </div>
                     )}
@@ -189,7 +201,7 @@ export default class Bubble extends React.PureComponent {
                 <div
                     className={`giftedChatBubbleWrapper-${this.props.position}`}
                     style={[
-                        styles[this.props.position].wrapper,
+                        // styles[this.props.position].wrapper,
                         this.props.wrapperStyle[this.props.position],
                         this.handleBubbleToNext(),
                         this.handleBubbleToPrevious()
@@ -197,6 +209,7 @@ export default class Bubble extends React.PureComponent {
                     <button
                         // onLongPress={this.onLongPress}
                         // accessibilityTraits="text"
+                        className={'giftedChatButton'}
                         {...this.props.touchableProps}>
                         <div>
                             {this.renderCustomView()}
@@ -211,7 +224,7 @@ export default class Bubble extends React.PureComponent {
                                     ]
                                 ]}>
                                 {this.renderUsername()}
-                                {this.renderTime()}
+                                {/*this.renderTime()*/}
                                 {this.renderTicks()}
                             </div>
                         </div>

@@ -39,13 +39,13 @@ export default class GiftedAvatar extends React.PureComponent {
         // inspired by https://github.com/wbinnssmith/react-user-avatar
         // colors from https://flatuicolors.com/
         const colors = [
-            carrot,
-            emerald,
-            peterRiver,
-            wisteria,
-            alizarin,
-            turquoise,
-            midnightBlue
+            'carrot',
+            'emerald',
+            'peterRiver',
+            'wisteria',
+            'alizarin',
+            'turquoise',
+            'midnightBlue'
         ];
 
         this.avatarColor = colors[sumChars % colors.length];
@@ -76,7 +76,9 @@ export default class GiftedAvatar extends React.PureComponent {
 
     renderInitials() {
         return (
-            <div style={[styles.textStyle, this.props.textStyle]}>
+            <div
+                className={'giftedChatGiftedAvatarInitials'}
+                style={[styles.textStyle, this.props.textStyle]}>
                 {this.avatarName}
             </div>
         );
@@ -116,23 +118,26 @@ export default class GiftedAvatar extends React.PureComponent {
         this.setAvatarColor();
 
         return (
-            <button
-                disabled={!this.props.onPress}
-                onClick={() => {
-                    const { onPress, ...other } = this.props;
-                    if (this.props.onPress) {
-                        this.props.onPress(other);
-                    }
-                }}
-                style={[
-                    styles.avatarStyle,
-                    { backgroundColor: this.avatarColor },
-                    this.props.avatarStyle
-                ]}
-                // accessibilityTraits="image"
-            >
-                {this.renderInitials()}
-            </button>
+            <div className={`giftedChatGiftedAvatar ${this.avatarColor}`}>
+                <button
+                    disabled={!this.props.onPress}
+                    onClick={() => {
+                        const { onPress, ...other } = this.props;
+                        if (this.props.onPress) {
+                            this.props.onPress(other);
+                        }
+                    }}
+                    className={'giftedChatButton'}
+                    style={[
+                        styles.avatarStyle,
+                        { backgroundColor: this.avatarColor },
+                        this.props.avatarStyle
+                    ]}
+                    // accessibilityTraits="image"
+                >
+                    {this.renderInitials()}
+                </button>
+            </div>
         );
     }
 }

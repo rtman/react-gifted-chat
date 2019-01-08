@@ -3,6 +3,55 @@
     padding: 0;
     font-family: roboto;
     font-weight: 400;
+    /*background-color: none;*/
+}
+
+:root {
+    --defaultcolor: #b2b2b2;
+    --backgroundtransparent: transparent;
+    --defaultblue: #0084ff;
+    --leftbubblebackground: #f0f0f0;
+    --white: #fff;
+    --carrot: #e67e22;
+    --emerald: #2ecc71;
+    --peterriver: #3498db;
+    --wisteria: #8e44ad;
+    --alizarin: #e74c3c;
+    --turquoise: #1abc9c;
+    --midnightblue: #2c3e50;
+    --optiontintcolor: #007aff;
+    --timetextcolor: #aaa;
+}
+
+.carrot {
+    background-color: var(--carrot);
+    fill: var(--carrot);
+}
+.emerald {
+    background-color: var(--emerald);
+    fill: var(--emerald);
+}
+
+.peterRiver {
+    background-color: var(--peterRiver);
+    fill: var(--peterRiver);
+}
+.wisteria {
+    background-color: var(--wisteria);
+    fill: var(--wisteria);
+}
+.alizarin {
+    background-color: var(--alizarin);
+    fill: var(--alizarin);
+}
+.turquoise {
+    background-color: var(--turquoise);
+    fill: var(--turquoise);
+}
+
+.midnightBlue {
+    background-color: var(--midnightBlue);
+    fill: var(--midnightBlue);
 }
 
 .App {
@@ -12,40 +61,12 @@
     width: 100vw;
 }
 
-.App-logo {
-    animation: App-logo-spin infinite 20s linear;
-    height: 40vmin;
-}
-
-.App-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-}
-
-.App-link {
-    color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
 .giftedChatContainer {
     flex: 1 1;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    padding: 8px;
 }
 
 .giftedChatMessageWindow {
@@ -54,12 +75,24 @@
 }
 
 .giftedChatInputToolbarContainer {
+    border-top: 1px;
+    border-width: 1px;
 }
 
 .giftedChatInputToolbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .giftedChatComposer {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    /*border: none;*/
+    height: auto;
+    resize: none;
+    padding: 8px;
 }
 
 .giftedChatMessageWindowContainer {
@@ -82,6 +115,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;*/
+    margin-bottom: 32px;
 }
 
 .giftedChatMessageContainer-left {
@@ -119,6 +153,7 @@
     flex-direction: row;
     flex: 1;*/
     align-items: flex-start;
+
     /*max-width: 40%;*/
 }
 
@@ -129,30 +164,123 @@
 }
 
 .giftedChatBubbleWrapper-left {
-    border-radius: 15px;
-    background-color: white;
-    margin-right: 60px;
+    border-radius: 0px 14px 14px 14px;
+    background-color: var(--leftbubblebackground);
+    /*margin-right: 60px;*/
     min-height: 20px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    /*padding: 16px;*/
 }
 
 .giftedChatBubbleWrapper-right {
-    border-radius: 15px;
-    background-color: blue;
-    margin-right: 60px;
+    border-radius: 14px 0px 14px 14px;
+    background-color: var(--defaultblue);
+    /*margin-right: 60px;*/
     min-height: 20px;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+    /*padding: 16px;*/
+}
+
+.giftedChatMessageText-left {
+    color: black;
+}
+
+.giftedChatMessageText-right {
+    color: var(--white);
+}
+
+.giftedChatTickContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+.giftedChatSentTick {
+    color: var(--emerald);
+}
+.giftedChatReceivedTick {
+    color: var(--emerald);
+}
+.giftedChatPendingTick {
+    color: red;
 }
 
 .giftedChatSystemMessageContainer {
+    /*flex: 1;*/
+    display: flex;
+    justify-content: center;
 }
 
 .giftedChatSystemMessageWrapper {
+    background-color: var(--defaultcolor);
+    border-radius: 14px;
+    padding: 16px;
 }
 
 .giftedChatSystemMessageText {
+}
+
+.giftedChatMessageTimeContainer-left {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 8px 0px 8px 0px;
+}
+.giftedChatMessageTimeContainer-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 8px 0px 8px 0px;
+}
+
+.giftedChatDateContainer {
+}
+.giftedChatDateWrapper {
+}
+.giftedChatDate {
+    font-size: 14px;
+}
+.giftedChatMessageTime-left {
+    font-size: 14px;
+    color: var(--timetextcolor);
+}
+.giftedChatMessageTime-right {
+    font-size: 14px;
+    color: var(--timetextcolor);
+}
+
+.giftedChatButton {
+    display: flex;
+    justify-content: center;
+    border: 0;
+    background: none;
+    box-shadow: none;
+    border-radius: 0px;
+    padding: 16px;
+}
+
+.giftedChatGiftedAvatar {
+    display: flex;
+    justify-content: center;
+    border-radius: 50px;
+    margin: 8px;
+}
+
+.giftedChatSendButton {
+    display: flex;
+    justify-content: center;
+    border: 0;
+    background: none;
+    box-shadow: none;
+    border-radius: 0px;
+    padding: 16px;
+    color: var(--white);
+    background-color: var(--defaultblue);
+}
+
+.giftedChatSendText {
 }

@@ -33,7 +33,7 @@ export default class Composer extends React.Component {
         return (
             <textarea
                 className={'giftedChatComposer'}
-                // testID={this.props.placeholder}
+                testID={this.props.placeholder}
                 // accessible
                 // accessibilityLabel={this.props.placeholder}
                 placeholder={this.props.placeholder}

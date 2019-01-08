@@ -26,9 +26,13 @@ export default function Day(
 ) {
     if (!isSameDay(currentMessage, inverted ? previousMessage : nextMessage)) {
         return (
-            <div style={[styles.container, containerStyle]}>
-                <div style={wrapperStyle}>
-                    <div style={[styles.text, textStyle]}>
+            <div
+                className={'giftedChatDateContainer'}
+                style={[styles.container, containerStyle]}>
+                <div className={'giftedChatDateWrapper'} style={wrapperStyle}>
+                    <div
+                        className={'giftedChatDate'}
+                        style={[styles.text, textStyle]}>
                         {moment(currentMessage.createdAt)
                             .locale(context.getLocale())
                             .format(dateFormat)

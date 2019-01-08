@@ -21,13 +21,14 @@ export default function Send({
                 testID="send"
                 // accessible
                 // accessibilityLabel="send"
+                className={'giftedChatSendButton'}
                 style={[styles.container, containerStyle]}
                 onClick={() => {
                     onSend({ text: text.trim() }, true);
                 }}
                 // accessibilityTraits="button"
             >
-                <div>
+                <div className={'giftedChatSendText'}>
                     {children || (
                         <div style={[styles.text, textStyle]}>{label}</div>
                     )}

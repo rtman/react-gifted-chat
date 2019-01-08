@@ -22,8 +22,11 @@ export default function Time(
      context
 ) {
      return (
-          <div style={[styles[position].container, containerStyle[position]]}>
+          <div
+               className={`giftedChatMessageTimeContainer-${position}`}
+               style={[styles[position].container, containerStyle[position]]}>
                <div
+                    className={`giftedChatMessageTime-${position}`}
                     style={[
                          styles[position].text,
                          textStyle[position],

@@ -148,10 +148,10 @@ class GiftedChat extends React.Component {
     };
 
     getMessages = () => {
-        console.log(
-            'GiftedChat - getMessages - this._messages',
-            this._messages
-        );
+        // console.log(
+        //     'GiftedChat - getMessages - this._messages',
+        //     this._messages
+        // );
         return this._messages;
     };
 
@@ -310,7 +310,7 @@ class GiftedChat extends React.Component {
     //   this._messageContainerRef.scrollTo({ y: 0, animated });
     // }
 
-    renderMessages() {
+    renderMessages = () => {
         // const AnimatedView = this.props.isAnimated === true ? Animated.View : View;
         return (
             <div
@@ -327,9 +327,9 @@ class GiftedChat extends React.Component {
                 {this.renderChatFooter()}
             </div>
         );
-    }
+    };
 
-    onSend(messages = [], shouldResetInputToolbar = false) {
+    onSend = (messages = [], shouldResetInputToolbar = false) => {
         if (!Array.isArray(messages)) {
             messages = [messages];
         }
@@ -348,7 +348,7 @@ class GiftedChat extends React.Component {
         }
 
         this.props.onSend(messages);
-        this.scrollToBottom();
+        // this.scrollToBottom();
 
         if (shouldResetInputToolbar === true) {
             setTimeout(() => {
@@ -357,12 +357,14 @@ class GiftedChat extends React.Component {
                 }
             }, 100);
         }
-    }
+    };
 
-    resetInputToolbar() {
+    resetInputToolbar = () => {
+        console.log('resetInputToolbar', this.textInput);
         if (this.textInput) {
-            this.textInput.clear();
+            this.textInput.value = '';
         }
+        // document.getElementById("textInput").value = "";
         this.notifyInputTextReset();
         const newComposerHeight = MIN_COMPOSER_HEIGHT;
         // const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard(
@@ -375,13 +377,13 @@ class GiftedChat extends React.Component {
             //   newMessagesContainerHeight
             // )
         });
-    }
+    };
 
-    focusTextInput() {
+    focusTextInput = () => {
         if (this.textInput) {
             this.textInput.focus();
         }
-    }
+    };
 
     // onInputSizeChanged(size) {
     //   const newComposerHeight = Math.max(
@@ -399,7 +401,7 @@ class GiftedChat extends React.Component {
     //   });
     // }
 
-    onInputTextChanged(text) {
+    onInputTextChanged = (text) => {
         if (this.getIsTypingDisabled()) {
             return;
         }
@@ -410,13 +412,13 @@ class GiftedChat extends React.Component {
         if (this.props.text === undefined) {
             this.setState({ text });
         }
-    }
+    };
 
-    notifyInputTextReset() {
+    notifyInputTextReset = () => {
         if (this.props.onInputTextChanged) {
             this.props.onInputTextChanged('');
         }
-    }
+    };
 
     onInitialLayoutViewLayout = () => {
         // const { layout } = e.nativeEvent;
@@ -458,7 +460,7 @@ class GiftedChat extends React.Component {
     //   }
     // }
 
-    renderInputToolbar() {
+    renderInputToolbar = () => {
         const inputToolbarProps = {
             ...this.props,
             text: this.getTextFromProp(this.state.text),
@@ -471,7 +473,8 @@ class GiftedChat extends React.Component {
             onTextChanged: this.onInputTextChanged,
             textInputProps: {
                 ...this.props.textInputProps,
-                ref: (textInput) => (this.textInput = textInput),
+                ref: (textarea) => (this.textInput = textarea),
+                id: 'textInput',
                 maxLength: this.getIsTypingDisabled()
                     ? 0
                     : this.props.maxInputLength
@@ -481,9 +484,9 @@ class GiftedChat extends React.Component {
             return this.props.renderInputToolbar(inputToolbarProps);
         }
         return <InputToolbar {...inputToolbarProps} />;
-    }
+    };
 
-    renderChatFooter() {
+    renderChatFooter = () => {
         if (this.props.renderChatFooter) {
             const footerProps = {
                 ...this.props
@@ -491,14 +494,14 @@ class GiftedChat extends React.Component {
             return this.props.renderChatFooter(footerProps);
         }
         return null;
-    }
+    };
 
-    renderLoading() {
+    renderLoading = () => {
         if (this.props.renderLoading) {
             return this.props.renderLoading();
         }
         return null;
-    }
+    };
 
     render() {
         if (this.state.isInitialized === true) {
